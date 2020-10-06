@@ -122,6 +122,12 @@ void PMAC2Turbo::Connect (std::string const& IP, int const PORT)
     l() && fL << "ERROR: Cannot create socket" << std::endl;
   }
 
+  // Set the timeout to 5 seconds
+  struct timeval tv;
+  tv.tv_sec = 5;
+  tv.tv_usec = 0;
+  setsockopt(fSocket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
+
   // Connect socket or return an error
   if (connect(fSocket, res->ai_addr, res->ai_addrlen) == 0) {
   } else {

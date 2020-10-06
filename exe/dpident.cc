@@ -19,7 +19,7 @@ int dpident (std::string const& IP)
   PMAC2Turbo PMAC(IP, 1025);
 
   PMAC.SendLine("IDNUMBER");
-  sleep(5);
+  // sleep(5);
   PMAC.GetBuffer();
 
   return 0;
