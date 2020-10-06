@@ -1143,7 +1143,7 @@ void PMAC2Turbo::GetBuffer (std::string const& OutFileName, std::ostream* so, bo
   fEthCmd.wLength     = htons(2);
 
   send(fSocket, (char*) &fEthCmd, ETHERNETCMDSIZE, 0);
-  recv(fSocket, fData, 2, 0);
+  recv(fSocket, fData, 2, MSG_WAITALL);
 
   //int call = 0;
   while (fData[0] == 1) {
@@ -1154,7 +1154,7 @@ void PMAC2Turbo::GetBuffer (std::string const& OutFileName, std::ostream* so, bo
     fEthCmd.wIndex      = 0;
     fEthCmd.wLength     = 0;
     send(fSocket, (char*) &fEthCmd, ETHERNETCMDSIZE, 0);
-    recv(fSocket, (char*) &fData, 1400, 0);
+    recv(fSocket, (char*) &fData, 1400, MSG_WAITALL);
 
     int cr_at = -1;
     bool ack_found = false;
@@ -1198,7 +1198,7 @@ void PMAC2Turbo::GetBuffer (std::string const& OutFileName, std::ostream* so, bo
     fEthCmd.wIndex      = 0;
     fEthCmd.wLength     = htons(2);
     send(fSocket, (char*) &fEthCmd, ETHERNETCMDSIZE, 0);
-    recv(fSocket, fData, 2, 0);
+    recv(fSocket, fData, 2, MSG_WAITALL);
   }
 
   if (fo) {
